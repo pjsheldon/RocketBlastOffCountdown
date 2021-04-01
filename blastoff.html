@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Week 4 Programming Lab "blastoff.HTML"
+	         Date - 9/27/20 
+	    By: Patrick "PJ" Sheldon -->
+
+<head>
+	<title>Countdown to Blast Off</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<!-- paragraph, centerted, containing the title, progress bar, and buttons -->
+	<p><center> 
+
+	<h1>Mission Control Countdown</h1>                         <!-- Title -->
+
+	<progress value="0" max="10" id="progressBar"></progress>  <!-- Progress Bar  -->
+	
+	<div id="countdown"></div>                                 <!-- Countdown Text -->
+	
+	<button id="start" onclick="blastOff()">Click to start Countdown</button> <!-- Button to start countdown --> 
+	<button id="reset" onclick="resetBar()">Reset</button>                    <!-- Button to reset the page -->
+	</center></p>
+	<!--Paragraph, centered, containing the animated rocket -->
+	<p><center>
+		<div id ="myContainer">            <!-- containing the rocket -->
+			<div id ="myAnimation"></div>  <!-- Tag for the animation of the rocket -->
+		</div>
+	</center></p>	
+
+	<script >
+
+		function blastOff() {                            //blast off fuction name for the countdown
+
+			var timeleft = 10;                           //timer starting point
+			var downloadTimer = setInterval(function(){  //countdown fuction
+  		
+  			if(timeleft <= 0){                           //if statement when countdown hits zero
+    			clearInterval(downloadTimer);            // timer stops
+    			document.getElementById("countdown").innerHTML = "Blast Off!!"; // Timer displays blast off
+    			myMove();                                //Timer starts animation at zero
+  			}
+  			else {
+    			document.getElementById("countdown").innerHTML = timeleft + " seconds remaining"; // if not at zero the loop continues displaying time.
+			}
+  		
+  			document.getElementById("progressBar").value = 10 - timeleft; // progress bar status
+  		
+  			timeleft -= 1; // subtract 1 in the countdown
+			}, 1000); // in milliseconds interval
+		}
+	</script>
+	<script type="text/javascript">
+		
+		function resetBar() { // fuction for the rest button
+
+			location.reload(); // reloads webpage
+		}
+	</script>
+	<script>
+		function myMove() {
+  			var elem = document.getElementById("myAnimation"); // id location in HTML  
+  			var pos = 0;                                       //starting postion
+  			var id = setInterval(frame, 0);                    // sets rate and movement
+  			
+  			function frame() {                                 //movement fuction
+    			if (pos == 350) {                              // if postion is finished
+      				clearInterval(id);                         //stops movement
+    			} 	
+    			else {
+      				pos++;                                     //postion increases 
+      				elem.style.bottom = pos + 'px';            //animation moves from bottom to top one pixel
+      				 
+    			}
+  			}
+		}
+</script>
+
+</body>
+</html>
